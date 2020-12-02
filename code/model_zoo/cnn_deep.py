@@ -2,8 +2,11 @@ from tensorflow import keras
 from tfomics import layers, utils
 
 
-def model(activation='relu', input_shape=200):
+def model(activation='relu', input_shape=200, initialization=None):
 
+
+    if not initialization:
+        initialization == 'glorot_uniform'
 
     if input_shape == 1000:
         multiplier = 2
@@ -20,6 +23,7 @@ def model(activation='relu', input_shape=200):
                            kernel_size=19,  #200
                            padding='same', 
                            activation=activation, 
+                           kernel_initializer=initialization,
                            dropout=0.1,
                            l2=1e-6, 
                            bn=True)
